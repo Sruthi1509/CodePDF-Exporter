@@ -1,8 +1,8 @@
 # CodePDF Exporter
 
 ![VS Code Marketplace](https://img.shields.io/badge/VSCode-Marketplace-blue)
-![Downloads](https://img.shields.io/badge/downloads-0-brightgreen)
-![Version](https://img.shields.io/badge/version-0.0.1-orange)
+![Installs](https://img.shields.io/visual-studio-marketplace/i/smenon.codepdf-exporter-green)
+![Version](https://img.shields.io/badge/version-0.0.2-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ![CodePDF Exporter Preview](images/demo.gif)
