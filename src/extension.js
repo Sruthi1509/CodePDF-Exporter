@@ -72,6 +72,9 @@ class CodePDFExporterViewProvider {
             }
             if (message.command === 'generate') {
                 const { font, size, mode, selectedFiles, rootPath, newPagePerFile } = message;
+                const showLineNumbers = vscode.workspace
+                    .getConfiguration('codepdf-exporter')
+                    .get('showLineNumbers', true);
                 const workspaceFolders = vscode.workspace.workspaceFolders;
                 if (!workspaceFolders) {
                     vscode.window.showErrorMessage('No workspace folder open!');
@@ -106,7 +109,7 @@ class CodePDFExporterViewProvider {
                     cancellable: false
                 }, async () => {
                     try {
-                        await (0, pdfGenerator_1.generatePDF)(filesToPrint, font, parseInt(size, 10), saveUri.fsPath, newPagePerFile !== false);
+                        await (0, pdfGenerator_1.generatePDF)(filesToPrint, font, parseInt(size, 10), saveUri.fsPath, newPagePerFile !== false, showLineNumbers);
                         vscode.window.showInformationMessage('PDF saved successfully!', 'Open PDF').then(selection => {
                             if (selection === 'Open PDF') {
                                 vscode.env.openExternal(saveUri);

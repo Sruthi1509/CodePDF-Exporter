@@ -45,7 +45,7 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
             }
 
             if (message.command === 'generate') {
-                const { font, size, mode, selectedFiles, rootPath, newPagePerFile } = message;
+                const { font, size, mode, selectedFiles, rootPath, newPagePerFile, showLineNumbers } = message;
 
                 const workspaceFolders = vscode.workspace.workspaceFolders;
                 if (!workspaceFolders) {
@@ -90,7 +90,8 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
                             font,
                             parseInt(size, 10),
                             saveUri.fsPath,
-                            newPagePerFile !== false
+                            newPagePerFile !== false,
+                            showLineNumbers
                         );
                         vscode.window.showInformationMessage(
                             'PDF saved successfully!', 'Open PDF'
@@ -371,6 +372,10 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
             <input type="checkbox" id="newPagePerFile" checked>
             <label for="newPagePerFile">Each file starts on a new page</label>
         </div>
+        <div class="option-row">
+            <input type="checkbox" id="showLineNumbers" checked>
+            <label for="showLineNumbers">Show line numbers</label>
+        </div>
     </div>
 
     <div class="section">
@@ -450,13 +455,15 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
                 }
             }
             const newPagePerFile = document.getElementById('newPagePerFile').checked;
+            const showLineNumbers = document.getElementById('showLineNumbers').checked;
             vscode.postMessage({
                 command: 'generate',
                 font, size,
                 mode: currentMode,
                 selectedFiles,
                 rootPath,
-                newPagePerFile
+                newPagePerFile,
+                showLineNumbers
             });
         }
 

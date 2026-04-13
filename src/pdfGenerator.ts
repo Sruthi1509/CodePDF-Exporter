@@ -95,7 +95,8 @@ export async function generatePDF(
     fontName: string,
     fontSize: number,
     outputPath: string,
-    newPagePerFile: boolean = true
+    newPagePerFile: boolean = true,
+    showLineNumbers: boolean = true
 ): Promise<void> {
     let standardFontEnum = StandardFonts.Courier;
     let boldStandardFontEnum = StandardFonts.HelveticaBold;
@@ -128,6 +129,8 @@ export async function generatePDF(
     const boldFont = await pdfDoc.embedFont(boldStandardFontEnum);
 
     const lineHeight = fontSize * 1.6;
+    const codeStartX = showLineNumbers ? CODE_X : 72;
+    const codeWidth = showLineNumbers ? CODE_WIDTH : PAGE_WIDTH - 72 - MARGIN_RIGHT;
 
     let page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
     let currentY = PAGE_HEIGHT - MARGIN_TOP;
@@ -158,7 +161,7 @@ export async function generatePDF(
 
         // ── File Title — left aligned with code ──
         page.drawText(fileName, {
-            x: CODE_X,
+            x: codeStartX,
             y: currentY,
             size: 13,
             font: boldFont,
@@ -172,7 +175,7 @@ export async function generatePDF(
             const sanitized = rawLine
                 .replace(/\t/g, '    ')
                 .replace(/[^\x20-\x7E]/g, ' ');
-            const chunks = wrapLine(sanitized, font, fontSize, CODE_WIDTH);
+            const chunks = wrapLine(sanitized, font, fontSize, codeWidth);
 
             for (let chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
                 const chunk = chunks[chunkIndex];
@@ -184,7 +187,7 @@ export async function generatePDF(
                 }
 
                 // Line number — starts at MARGIN_LEFT, right aligned within column
-                if (chunkIndex === 0) {
+                if (showLineNumbers && chunkIndex === 0) {
                     const lineNumStr = String(lineNum + 1);
                     const numWidth = font.widthOfTextAtSize(lineNumStr, fontSize);
                     page.drawText(lineNumStr, {
@@ -197,17 +200,19 @@ export async function generatePDF(
                 }
 
                 // Vertical separator
-                page.drawLine({
-                    start: { x: MARGIN_LEFT + LINE_NUM_COL_WIDTH + 4, y: currentY + fontSize },
-                    end: { x: MARGIN_LEFT + LINE_NUM_COL_WIDTH + 4, y: currentY - 2 },
-                    thickness: 0.3,
-                    color: rgb(0.75, 0.75, 0.75),
-                });
+                if (showLineNumbers) {
+                    page.drawLine({
+                        start: { x: MARGIN_LEFT + LINE_NUM_COL_WIDTH + 4, y: currentY + fontSize },
+                        end: { x: MARGIN_LEFT + LINE_NUM_COL_WIDTH + 4, y: currentY - 2 },
+                        thickness: 0.3,
+                        color: rgb(0.75, 0.75, 0.75),
+                    });
+                }
 
                 // Code text
                 if (chunk.length > 0) {
                     page.drawText(chunk, {
-                        x: CODE_X,
+                        x: codeStartX,
                         y: currentY,
                         size: fontSize,
                         font: font,
