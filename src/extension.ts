@@ -88,7 +88,7 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
                         await generatePDF(
                             filesToPrint,
                             font,
-                            parseInt(size, 10),
+                            parseFloat(size),
                             saveUri.fsPath,
                             newPagePerFile !== false,
                             showLineNumbers
@@ -361,8 +361,10 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
     <div class="section">
         <div class="section-label">Font Size</div>
         <div class="slider-row">
-            <input type="range" id="size" min="8" max="20" value="12" oninput="updatePreview()">
-            <span class="size-val" id="sizeVal">12px</span>
+            <input type="range" id="size" min="8" max="20" step="0.5" value="12" oninput="updatePreview()">
+            <input type="number" id="sizeVal" min="8" max="20" step="0.5" value="12" 
+                style="width:48px;background:var(--vscode-input-background);color:var(--vscode-button-background,#0e639c);border:1px solid var(--vscode-input-border,#454545);border-radius:2px;font-size:12px;font-weight:600;padding:2px 4px;outline:none;"
+                oninput="document.getElementById('size').value=this.value;updatePreview()">
         </div>
     </div>
 
@@ -436,7 +438,7 @@ class CodePDFExporterViewProvider implements vscode.WebviewViewProvider {
         function updatePreview() {
             const font = document.getElementById('font').value;
             const size = document.getElementById('size').value;
-            document.getElementById('sizeVal').textContent = size + 'px';
+            document.getElementById('sizeVal').value = size;
             document.getElementById('preview').style.fontFamily = font;
             document.getElementById('preview').style.fontSize = size + 'px';
         }

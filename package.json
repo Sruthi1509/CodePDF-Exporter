@@ -2,7 +2,7 @@
   "name": "codepdf-exporter",
   "displayName": "CodePDF Exporter",
   "description": "Export your entire VS Code project or selected files to a clean PDF with file titles, line numbers, and font customization. Perfect for printing code, sharing projects, and documentation.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "smenon",
   "license": "MIT",
   "icon": "icons/icon.png",
@@ -82,7 +82,13 @@
     "test": "vscode-test",
     "watch-tests": "npm run test -- --watch"
   },
+  "files": [
+    "dist/**",
+    "assets/**",
+    "icons/**"
+  ],
   "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
     "pdf-lib": "^1.17.1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 # CodePDF Exporter
 
-[![Marketplace](https://img.shields.io/badge/VS%20Marketplace-CodePDF%20Exporter-blue?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=smenon.codepdf-exporter) [![Version](https://img.shields.io/badge/version-0.0.3-green)](https://marketplace.visualstudio.com/items?itemName=smenon.codepdf-exporter) [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Marketplace](https://img.shields.io/badge/VS%20Marketplace-CodePDF%20Exporter-blue?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=smenon.codepdf-exporter) [![Version](https://img.shields.io/badge/version-0.0.4-green)](https://marketplace.visualstudio.com/items?itemName=smenon.codepdf-exporter) [![Installs](https://img.shields.io/badge/installs-1k%2B-brightgreen)](https://marketplace.visualstudio.com/items?itemName=smenon.codepdf-exporter) [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 
 A VS Code extension that lets you export your VS Code project or selected files to PDF.  
@@ -11,7 +11,9 @@ Perfect for printing code, sharing projects, and generating clean documentation.
 
 - **Whole Project Export** — Export all code files in the workspace to a single PDF
 - **Selective Export** — Pick specific files to include
-- **Font Size Control** — Adjustable font size (8–20px) via slider
+- **Font Size Control** — Adjustable font size (8–20px) via slider with decimal support (0.5 steps)
+- **Editable Font Size** — Type the exact font size directly into the input field
+- **UTF-8 / Unicode Support** — Full support for Spanish (`ñ`, `á`), French (`à`, `ê`), German (`ü`, `ß`) and other non-ASCII characters
 - **New Page Per File** — Option to start each file on a new page, or flow continuously with spacing
 - **Line Numbers** — Every line is numbered with a clean separator
 - **Word Wrap** — Long lines wrap automatically to fit the page
@@ -42,14 +44,7 @@ This extension does not add any VS Code settings. All configuration is done thro
 
 ## Release Notes
 
-### 0.0.1
-
-- Initial release
-- Whole project and selective file export
-- Configurable font size
-- New page per file toggle
-- Line numbers with separator
-- Automatic line wrapping
+See the full changelog in [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 
