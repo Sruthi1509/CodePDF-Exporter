@@ -4,6 +4,9 @@ All notable changes to the "CodePDF Exporter" extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.5] - 2026-08-12
+### Fixed
+- Test timeout issue for decimal font size test — increased timeout to 10s to allow PDF generation to complete
 
 ## [0.0.4] - 2026-08-13
 ### Added
